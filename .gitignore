@@ -1,0 +1,12 @@
+.DS_Store
+*.swp
+*~.nib
+*.xcshareddata
+*.xcbkptlist
+*xcuserdata/
+*.xcworkspace/
+Podfile.lock
+Pods
+Rambafile
+Templates
+swifty_viper
