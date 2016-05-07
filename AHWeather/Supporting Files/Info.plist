@@ -52,5 +52,7 @@
 	<string>App use Locations service mode In Use</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>By accessing your location</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 </dict>
 </plist>

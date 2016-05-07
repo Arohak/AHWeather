@@ -30,7 +30,6 @@
 		5296E93D1C8D7447006F6145 /* MABottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296E93A1C8D7447006F6145 /* MABottomView.swift */; };
 		5296E93E1C8D7447006F6145 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296E93B1C8D7447006F6145 /* MapView.swift */; };
 		5296E93F1C8D7447006F6145 /* MATopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296E93C1C8D7447006F6145 /* MATopView.swift */; };
-		52ABD6791C8989BE00BF62AD /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52ABD6781C8989BE00BF62AD /* Info.plist */; };
 		52ABD68F1C8C98A300BF62AD /* DEBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ABD68A1C8C98A300BF62AD /* DEBottomView.swift */; };
 		52ABD6901C8C98A300BF62AD /* DEDayTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ABD68B1C8C98A300BF62AD /* DEDayTableView.swift */; };
 		52ABD6911C8C98A300BF62AD /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ABD68C1C8C98A300BF62AD /* DetailView.swift */; };
@@ -796,7 +795,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52ABD6791C8989BE00BF62AD /* Info.plist in Resources */,
 				52E93D751C8718DF003BA595 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

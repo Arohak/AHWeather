@@ -7,28 +7,6 @@
 //
 
 class LandingModuleConfigurator {
-
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
-
-        if let viewController = viewInput as? LandingViewController {
-            configure(viewController)
-        }
-    }
-
-    private func configure(viewController: LandingViewController) {
-
-        let router = LandingRouter()
-
-        let presenter = LandingPresenter()
-        presenter.view = viewController
-        presenter.router = router
-
-        let interactor = LandingInteractor()
-        interactor.output = presenter
-
-        presenter.interactor = interactor
-        viewController.output = presenter
-    }
     
     func configureModuleForPresenter(presenter: AnyObject) {
         

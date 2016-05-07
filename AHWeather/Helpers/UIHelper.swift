@@ -9,9 +9,9 @@
 import SwiftLoader
 import PKHUD
 
-class UIHelper {
+struct UIHelper {
     
-    class func configurateApplicationApperance() {
+    static func configurateApplicationApperance() {
         UIApplication.sharedApplication().statusBarHidden = false
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
@@ -21,7 +21,7 @@ class UIHelper {
         navBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: WHITE, NSFontAttributeName : TITLE_BTN_FONT]
     }
     
-    class func showProgressHUD() {
+    static func showProgressHUD() {
         var config = SwiftLoader.Config()
         config.size = 100
         config.spinnerColor = WHITE
@@ -31,25 +31,25 @@ class UIHelper {
         SwiftLoader.show(animated: true)
     }
     
-    class func hideProgressHUD() {
+    static func hideProgressHUD() {
         SwiftLoader.hide()
     }
     
-    class func showHUD(message: String) {
+    static func showHUD(message: String) {
         PKHUD.sharedHUD.contentView = PKHUDTextView(text: message)
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
         PKHUD.sharedHUD.show()
         PKHUD.sharedHUD.hide(afterDelay: 2.0);
     }
     
-    class func showAlert(message: String) {
+    static func showAlert(message: String) {
         let alertController = UIAlertController(title: "AHWeather", message: message, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         let vc = appDelegate.window!.rootViewController
         vc!.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    class func shakeWithView(view: UIView) {
+    static func shakeWithView(view: UIView) {
         let shake = CABasicAnimation(keyPath: "position")
         shake.duration = 0.1
         shake.repeatCount = 2

@@ -8,15 +8,6 @@
 
 class LandingModuleInitializer: NSObject {
 
-    //Connect with object on storyboard
-    @IBOutlet weak var viewController: LandingViewController!
-
-    override func awakeFromNib() {
-
-        let configurator = LandingModuleConfigurator()
-        configurator.configureModuleForViewInput(viewController)
-    }
-
     init(presentor: AnyObject) {
         super.init()
         

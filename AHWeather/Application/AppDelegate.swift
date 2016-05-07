@@ -18,10 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    private func startApplication() {
-        initServices()
-        UIHelper.configurateApplicationApperance()
-        
+    private func startApplication() {        
         let vc = rootPresenter.view as! UIViewController
         let nav = UINavigationController(rootViewController: vc)
         nav.setNavigationBarHidden(true, animated: true)
@@ -31,7 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     }
     
-    private func initServices() {
+    //MARK: - TyphoonDefinition Inject
+    func configureApplication() {
+        UIHelper.configurateApplicationApperance()
+        initServices()
+    }
+    
+    func initServices() {
         GMSServices.provideAPIKey("AIzaSyC0ZOSD0RDLsrraE7iID3jQDSG0j-L35rU")
     }
 }

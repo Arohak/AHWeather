@@ -12,6 +12,7 @@ public class ApplicationAssembly: TyphoonAssembly {
     public dynamic func appDelegate() -> AnyObject {
         return TyphoonDefinition.withClass(AppDelegate.self) {
             $0.injectProperty("rootPresenter", with: self.landingPresenter())
+            $0.injectMethod(Selector("configureApplication"), parameters: nil)
         }
     }
 
