@@ -19,7 +19,7 @@ class LandingInteractor: NSObject, LandingInteractorInput {
                 .subscribe(onNext: { data in
                     dbHelper.storeWeather(Weather(data: data))
                     
-                    ++count
+                    count += 1
                     if count == self.cities.count {
                         let items = dbHelper.getStoredWeathers().map({$0})
                         self.output.dataIsReady(items)

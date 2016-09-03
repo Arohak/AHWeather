@@ -39,19 +39,19 @@ class DetailViewController: UIViewController, DetailViewInput {
         detailView.topView.iconImageView.kf_setImageWithURL(NSURL(string: "http:" + object.weather.current.condition.icon)!)
         detailView.topView.titleLabel.text = object.weather.current.condition.text
         detailView.topView.tempLabel.text = object.weather.current.tempC
-        detailView.topView.weekLabel.text = Utils.getWeekString(days[0].date)
+        detailView.topView.weekLabel.text = days[0].date.weekDay
         detailView.topView.tempAverageLabel.text = days[0].day.maxTemp + "     " + days[0].day.minTemp
         
-        detailView.bottomView.updateLabel.text = "Updated:  " + Utils.stringFromDateString(object.weather.current.lastUpdated)
+        detailView.bottomView.updateLabel.text = "Updated:  " + object.weather.current.lastUpdated
     }
     
     // MARK: Private Methods
     private func baseConfig() {
-        detailView.topView.backButton.addTarget(self, action: Selector("back"), forControlEvents: .TouchUpInside)
-        detailView.topView.searchButton.addTarget(self, action: Selector("search"), forControlEvents: .TouchUpInside)
-        detailView.bottomView.fiveDayButton.addTarget(self, action: Selector("five"), forControlEvents: .TouchUpInside)
-        detailView.bottomView.tenDayButton.addTarget(self, action: Selector("ten"), forControlEvents: .TouchUpInside)
-        detailView.bottomView.updateButton.addTarget(self, action: Selector("update"), forControlEvents: .TouchUpInside)
+        detailView.topView.backButton.addTarget(self, action: #selector(DetailViewController.back), forControlEvents: .TouchUpInside)
+        detailView.topView.searchButton.addTarget(self, action: #selector(DetailViewController.search), forControlEvents: .TouchUpInside)
+        detailView.bottomView.fiveDayButton.addTarget(self, action: #selector(DetailViewController.five), forControlEvents: .TouchUpInside)
+        detailView.bottomView.tenDayButton.addTarget(self, action: #selector(DetailViewController.ten), forControlEvents: .TouchUpInside)
+        detailView.bottomView.updateButton.addTarget(self, action: #selector(DetailViewController.update), forControlEvents: .TouchUpInside)
 
         self.view = detailView
     }

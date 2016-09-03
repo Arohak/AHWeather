@@ -57,11 +57,11 @@ class Day : Object {
     convenience init(data: JSON) {
         self.init()
         
-        self.maxTemp = Utils.formateString(data["maxtemp_c"].stringValue)
-        self.minTemp = Utils.formateString(data["mintemp_c"].stringValue)
-        self.avgTemp = Utils.formateString(data["avgtemp_c"].stringValue)
-        self.maxWindMph = Utils.formateString(data["maxwind_mph"].stringValue)
-        self.maxWindKph = Utils.formateString(data["maxwind_kph"].stringValue)
+        self.maxTemp = data["maxtemp_c"].doubleValue.celsius
+        self.minTemp = data["mintemp_c"].doubleValue.celsius
+        self.avgTemp = data["avgtemp_c"].doubleValue.celsius
+        self.maxWindMph = data["maxwind_mph"].doubleValue.percent
+        self.maxWindKph = data["maxwind_kph"].doubleValue.percent
         self.condition = Condition(data: data["condition"])
     }
 }
@@ -99,15 +99,15 @@ class Hour : Object {
     convenience init(data: JSON) {
         self.init()
         
-        self.time = data["time"].stringValue
-        self.tempC = Utils.formateString(data["temp_c"].stringValue)
-        self.tempF = Utils.formateString(data["temp_f"].stringValue)
-        self.mphW = Utils.formateString(data["wind_mph"].stringValue)
-        self.kphW = Utils.formateString(data["wind_kph"].stringValue)
-        self.mbP = Utils.formateString(data["pressure_mb"].stringValue)
-        self.inP = Utils.formateString(data["pressure_in"].stringValue)
-        self.feelslikeC = Utils.formateString(data["feelslike_c"].stringValue)
-        self.feelslikeF = Utils.formateString(data["feelslike_f"].stringValue)
+        self.time = data["time"].stringValue.hour
+        self.tempC = data["temp_c"].doubleValue.celsius
+        self.tempF = data["temp_f"].doubleValue.fahrenheit
+        self.mphW = data["wind_mph"].doubleValue.percent
+        self.kphW = data["wind_kph"].doubleValue.percent
+        self.mbP = data["pressure_mb"].doubleValue.percent
+        self.inP = data["pressure_in"].doubleValue.percent
+        self.feelslikeC = data["feelslike_c"].doubleValue.celsius
+        self.feelslikeF = data["feelslike_f"].doubleValue.fahrenheit
         self.condition = Condition(data: data["condition"])
     }
 }

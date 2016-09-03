@@ -70,7 +70,7 @@ class TimeCollectionCell: UICollectionViewCell {
     
     func setValues(hour: Hour) {
         cellContentView.iconImageView.kf_setImageWithURL(NSURL(string: "http:" + hour.condition.icon)!)
-        cellContentView.timeLabel.text = Utils.stringFromDateString(hour.time)
+        cellContentView.timeLabel.text = hour.time
         cellContentView.tempLabel.text = hour.tempC
     }
     

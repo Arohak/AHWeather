@@ -48,10 +48,10 @@ class MapViewController: UIViewController, MapViewInput, UITextFieldDelegate {
         myMarker.icon = UIImage(named: "img_me")
 
         mapView.topView.textField.delegate = self
-        mapView.topView.searchButton.addTarget(self, action: Selector("search"), forControlEvents: .TouchUpInside)
-        mapView.bottomView.updateButton.addTarget(self, action: Selector("update"), forControlEvents: .TouchUpInside)
-        mapView.bottomView.cancelButton.addTarget(self, action: Selector("cancel"), forControlEvents: .TouchUpInside)
-        mapView.bottomView.nearMeButton.addTarget(self, action: Selector("nearMe"), forControlEvents: .TouchUpInside)
+        mapView.topView.searchButton.addTarget(self, action: #selector(MapViewController.search), forControlEvents: .TouchUpInside)
+        mapView.bottomView.updateButton.addTarget(self, action: #selector(MapViewController.update), forControlEvents: .TouchUpInside)
+        mapView.bottomView.cancelButton.addTarget(self, action: #selector(MapViewController.cancel), forControlEvents: .TouchUpInside)
+        mapView.bottomView.nearMeButton.addTarget(self, action: #selector(MapViewController.nearMe), forControlEvents: .TouchUpInside)
 
         self.view = mapView
     }

@@ -58,15 +58,15 @@ class Current : Object {
     convenience init(data: JSON) {
         self.init()
         
-        self.lastUpdated = data["last_updated"].stringValue
-        self.tempC = Utils.formateString(data["temp_c"].stringValue)
-        self.tempF = Utils.formateString(data["temp_f"].stringValue)
-        self.mphW = Utils.formateString(data["wind_mph"].stringValue)
-        self.kphW = Utils.formateString(data["wind_kph"].stringValue)
-        self.mbP = Utils.formateString(data["pressure_mb"].stringValue)
-        self.inP = Utils.formateString(data["pressure_in"].stringValue)
-        self.feelslikeC = Utils.formateString(data["feelslike_c"].stringValue)
-        self.feelslikeF = Utils.formateString(data["feelslike_f"].stringValue)
+        self.lastUpdated = data["last_updated"].stringValue.hour
+        self.tempC = data["temp_c"].doubleValue.celsius
+        self.tempF = data["temp_f"].doubleValue.fahrenheit
+        self.mphW = data["wind_mph"].doubleValue.percent
+        self.kphW = data["wind_kph"].doubleValue.percent
+        self.mbP = data["pressure_mb"].doubleValue.percent
+        self.inP = data["pressure_in"].doubleValue.percent
+        self.feelslikeC = data["feelslike_c"].doubleValue.celsius
+        self.feelslikeF = data["feelslike_f"].doubleValue.fahrenheit
         self.condition = Condition(data: data["condition"])
     }
 }

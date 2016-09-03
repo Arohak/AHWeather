@@ -89,7 +89,7 @@ class LandingCell: UITableViewCell {
         cellContentView.cityNameLabel.text = item.location.name
         cellContentView.iconImageView.kf_setImageWithURL(NSURL(string: "http:" + item.current.condition.icon)!)
         cellContentView.titleLabel.text = item.current.condition.text
-        cellContentView.tempLabel.text = "Temp:    " + item.current.tempC + "C,   " + item.current.tempF + "F"
+        cellContentView.tempLabel.text = "Temp:    " + item.current.tempC + ",  " + item.current.tempF
         cellContentView.mphLabel.text = "MPHW:    " + item.current.mphW
         cellContentView.kphLabel.text = "KPHW:    " + item.current.kphW
     }

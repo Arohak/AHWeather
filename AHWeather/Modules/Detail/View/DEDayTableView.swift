@@ -75,7 +75,7 @@ class DayCell: UITableViewCell {
     }
     
     func setValues(forecastDay: ForecastDay) {
-        cellContentView.titleLabel.text = Utils.getWeekString(forecastDay.date)
+        cellContentView.titleLabel.text = forecastDay.date.weekDay
         cellContentView.iconImageView.kf_setImageWithURL(NSURL(string: "http:" + forecastDay.day.condition.icon)!)
         cellContentView.tempLabel.text = forecastDay.day.maxTemp + "     " + forecastDay.day.minTemp
     }
