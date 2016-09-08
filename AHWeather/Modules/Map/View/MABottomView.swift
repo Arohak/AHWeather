@@ -60,7 +60,7 @@ class MABottomView: UIView {
     func addAllUIElements() {
         addSubview(updateButton)
         addSubview(cancelButton)
-        addSubview(nearMeButton)
+//        addSubview(nearMeButton)
 
         setConstraints()
     }
@@ -75,9 +75,9 @@ class MABottomView: UIView {
         cancelButton.autoPinEdge(.Right, toEdge: .Left, ofView: updateButton, withOffset: -DE_OFFSET/2)
         cancelButton.autoSetDimensionsToSize(CGSize(width: MA_BTN_HEIGHT*2.5, height: MA_BTN_HEIGHT))
         
-        nearMeButton.autoAlignAxisToSuperviewAxis(.Horizontal)
-        nearMeButton.autoPinEdgeToSuperviewEdge(.Left, withInset: DE_OFFSET/2)
-        nearMeButton.autoSetDimensionsToSize(CGSize(width: MA_BTN_HEIGHT, height: MA_BTN_HEIGHT))
+//        nearMeButton.autoAlignAxisToSuperviewAxis(.Horizontal)
+//        nearMeButton.autoPinEdgeToSuperviewEdge(.Left, withInset: DE_OFFSET/2)
+//        nearMeButton.autoSetDimensionsToSize(CGSize(width: MA_BTN_HEIGHT, height: MA_BTN_HEIGHT))
 
     }
 }

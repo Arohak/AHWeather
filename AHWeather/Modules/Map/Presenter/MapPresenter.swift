@@ -31,7 +31,7 @@ class MapPresenter: NSObject, MapModuleInput, MapViewOutput, MapInteractorOutput
     //MARK: - MapViewOutput
     func viewIsReady() {
         EventCenter.defaultCenter.register(self, handler: onEvent)
-        locationHelper.locationManager.startUpdatingLocation()
+//        locationHelper.locationManager.startUpdatingLocation()
 
         view.setupInitialState(self.city)
     }
