@@ -12,7 +12,7 @@ class LandingView: UIView {
     var tableView: LATableView!
 
     lazy var bgImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
         view.image = UIImage(named: "1")
         
         return view
@@ -20,10 +20,10 @@ class LandingView: UIView {
     
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
     }
     
-    convenience init(completionBlock: block) {
+    convenience init(completionBlock: @escaping block) {
         self.init()
         
         tableView = LATableView(completionBlock: completionBlock)
@@ -47,7 +47,7 @@ class LandingView: UIView {
     func setConstraints() {
         bgImageView.autoPinEdgesToSuperviewEdges()
         
-        tableView.autoPinEdgeToSuperviewEdge(.Top, withInset: LA_INSET*1.5)
-        tableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), excludingEdge: .Top)
+        tableView.autoPinEdge(toSuperviewEdge: .top, withInset: LA_INSET*1.5)
+        tableView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), excludingEdge: .top)
     }
 }

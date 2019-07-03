@@ -12,9 +12,9 @@ class MABottomView: UIView {
     
     //MARK: - Create UIElements
     lazy var updateButton: AHWButton = {
-        let view = AHWButton.newAutoLayoutView()
-        view.setBackgroundImage(UIImage(named: "img_bg"), forState: .Normal)
-        view.setTitle("UPDATE", forState: .Normal)
+        let view = AHWButton.newAutoLayout()
+        view.setBackgroundImage(UIImage(named: "img_bg"), for: .normal)
+        view.setTitle("UPDATE", for: .normal)
         view.clipsToBounds = true
         view.layer.cornerRadius = MA_RADIUS
         
@@ -22,9 +22,9 @@ class MABottomView: UIView {
     }()
     
     lazy var cancelButton: AHWButton = {
-        let view = AHWButton.newAutoLayoutView()
-        view.setBackgroundImage(UIImage(named: "img_bg"), forState: .Normal)
-        view.setTitle("CANCEL", forState: .Normal)
+        let view = AHWButton.newAutoLayout()
+        view.setBackgroundImage(UIImage(named: "img_bg"), for: .normal)
+        view.setTitle("CANCEL", for: .normal)
         view.clipsToBounds = true
         view.layer.cornerRadius = MA_RADIUS
 
@@ -32,21 +32,21 @@ class MABottomView: UIView {
     }()
     
     lazy var nearMeButton: AHWButton = {
-        let view = AHWButton.newAutoLayoutView()
-        view.setBackgroundImage(UIImage(named: "img_near"), forState: .Normal)
+        let view = AHWButton.newAutoLayout()
+        view.setBackgroundImage(UIImage(named: "img_near"), for: .normal)
         
         return view
     }()
     
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         backgroundColor = CLEAR
         addAllUIElements()
     }
     
-    convenience init(completionBlock: block) {
+    convenience init(completionBlock: @escaping block) {
         self.init()
         
         myBlock = completionBlock
@@ -67,17 +67,17 @@ class MABottomView: UIView {
     
     //MARK: - Constraints
     func setConstraints() {
-        updateButton.autoAlignAxisToSuperviewAxis(.Horizontal)
-        updateButton.autoPinEdgeToSuperviewEdge(.Right, withInset: 0)
-        updateButton.autoSetDimensionsToSize(CGSize(width: MA_BTN_HEIGHT*2.5, height: MA_BTN_HEIGHT))
+        updateButton.autoAlignAxis(toSuperviewAxis: .horizontal)
+        updateButton.autoPinEdge(toSuperviewEdge: .right, withInset: 0)
+        updateButton.autoSetDimensions(to: CGSize(width: MA_BTN_HEIGHT*2.5, height: MA_BTN_HEIGHT))
         
-        cancelButton.autoAlignAxisToSuperviewAxis(.Horizontal)
-        cancelButton.autoPinEdge(.Right, toEdge: .Left, ofView: updateButton, withOffset: -DE_OFFSET/2)
-        cancelButton.autoSetDimensionsToSize(CGSize(width: MA_BTN_HEIGHT*2.5, height: MA_BTN_HEIGHT))
+        cancelButton.autoAlignAxis(toSuperviewAxis: .horizontal)
+        cancelButton.autoPinEdge(.right, to: .left, of: updateButton, withOffset: -DE_OFFSET/2)
+        cancelButton.autoSetDimensions(to: CGSize(width: MA_BTN_HEIGHT*2.5, height: MA_BTN_HEIGHT))
         
-//        nearMeButton.autoAlignAxisToSuperviewAxis(.Horizontal)
-//        nearMeButton.autoPinEdgeToSuperviewEdge(.Left, withInset: DE_OFFSET/2)
-//        nearMeButton.autoSetDimensionsToSize(CGSize(width: MA_BTN_HEIGHT, height: MA_BTN_HEIGHT))
+//        nearMeButton.autoAlignAxis(toSuperviewAxis: .horizontal)
+//        nearMeButton.autoPinEdge(toSuperviewEdge: .left, withInset: DE_OFFSET/2)
+//        nearMeButton.autoSetDimensions(to: CGSize(width: MA_BTN_HEIGHT, height: MA_BTN_HEIGHT))
 
     }
 }

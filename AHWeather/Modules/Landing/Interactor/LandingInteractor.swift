@@ -15,22 +15,22 @@ class LandingInteractor: NSObject, LandingInteractorInput {
         var count = 0
         
         for city in cities {
-            _ = apiHelper.rx_GetWeather(city)
-                .subscribe(onNext: { data in
-                    dbHelper.storeWeather(Weather(data: data))
-                    
-                    count += 1
-                    if count == self.cities.count {
-                        let items = dbHelper.getStoredWeathers().map({$0})
-                        self.output.dataIsReady(items)
-                    }
-                    
-                    }, onError: { e in
-//                        let error = e as NSError
-//                        UIHelper.showHUD(error.localizedDescription)
-                        UIHelper.showHUD("No Internet Connection")
-                        let items = dbHelper.getStoredWeathers().map({$0})
-                        self.output.dataIsReady(items)
+            _ = apiHelper.rx_GetWeather(cityName: city)
+                .subscribe( onNext: { data in
+                        dbHelper.storeWeather(item: Weather(data: data))
+                        
+                        count += 1
+                        if count == self.cities.count {
+                            let items = dbHelper.getStoredWeathers().map({$0})
+                            self.output.dataIsReady(items: Array(items))
+                        }
+                        
+                }, onError: { e in
+//                    let error = e as NSError
+//                    UIHelper.showHUD(message: error.localizedDescription)
+                    UIHelper.showHUD(message: "No Internet Connection")
+                    let items = dbHelper.getStoredWeathers().map({$0})
+                    self.output.dataIsReady(items: Array(items))
                     })
         }
     }

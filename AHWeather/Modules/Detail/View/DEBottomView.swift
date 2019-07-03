@@ -12,51 +12,51 @@ class DEBottomView: UIView {
     
     //MARK: - Create UIElements
     lazy var fiveDayButton: AHWButton = {
-        let view = AHWButton.newAutoLayoutView()
-        view.setImage(UIImage(named: "img_5d"), forState: .Normal)
+        let view = AHWButton.newAutoLayout()
+        view.setImage(UIImage(named: "img_5d"), for: .normal)
         view.imageEdgeInsets = UIEdgeInsets(top: LA_ICON_SIZE*0.55, left: LA_ICON_SIZE*0.55, bottom: LA_ICON_SIZE*0.55, right: LA_ICON_SIZE*0.55)
         
         return view
     }()
     
     lazy var tenDayButton: AHWButton = {
-        let view = AHWButton.newAutoLayoutView()
-        view.setImage(UIImage(named: "img_10d"), forState: .Normal)
+        let view = AHWButton.newAutoLayout()
+        view.setImage(UIImage(named: "img_10d"), for: .normal)
         view.imageEdgeInsets = UIEdgeInsets(top: LA_ICON_SIZE*0.55, left: LA_ICON_SIZE*0.55, bottom: LA_ICON_SIZE*0.55, right: LA_ICON_SIZE*0.55)
 
         return view
     }()
     
     lazy var lineImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
         view.backgroundColor = GRAY
         
         return view
     }()
 
     lazy var updateLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         view.font = TITLE_BTN_FONT
         
         return view
     }()
     
     lazy var updateButton: AHWButton = {
-        let view = AHWButton.newAutoLayoutView()
-        view.setImage(UIImage(named: "img_upload"), forState: .Normal)
+        let view = AHWButton.newAutoLayout()
+        view.setImage(UIImage(named: "img_upload"), for: .normal)
         view.imageEdgeInsets = UIEdgeInsets(top: LA_ICON_SIZE*0.55, left: LA_ICON_SIZE*0.55, bottom: LA_ICON_SIZE*0.55, right: LA_ICON_SIZE*0.55)
         return view
     }()
     
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         backgroundColor = CLEAR
         addAllUIElements()
     }
     
-    convenience init(completionBlock: block) {
+    convenience init(completionBlock: @escaping block) {
         self.init()
         
         myBlock = completionBlock
@@ -79,23 +79,23 @@ class DEBottomView: UIView {
     
     //MARK: - Constraints
     func setConstraints() {
-        fiveDayButton.autoAlignAxisToSuperviewAxis(.Horizontal)
-        fiveDayButton.autoPinEdgeToSuperviewEdge(.Left, withInset: 0)
-        fiveDayButton.autoSetDimensionsToSize(CGSize(width: LA_ICON_SIZE*2, height: LA_ICON_SIZE*2))
+        fiveDayButton.autoAlignAxis(toSuperviewAxis: .horizontal)
+        fiveDayButton.autoPinEdge(toSuperviewEdge: .left, withInset: 0)
+        fiveDayButton.autoSetDimensions(to: CGSize(width: LA_ICON_SIZE*2, height: LA_ICON_SIZE*2))
         
-        lineImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
-        lineImageView.autoPinEdge(.Left, toEdge: .Right, ofView: fiveDayButton, withOffset: -DE_OFFSET/2)
-        lineImageView.autoSetDimensionsToSize(CGSize(width: 2, height: LA_ICON_SIZE/2))
+        lineImageView.autoAlignAxis(toSuperviewAxis: .horizontal)
+        lineImageView.autoPinEdge(.left, to: .right, of: fiveDayButton, withOffset: -DE_OFFSET/2)
+        lineImageView.autoSetDimensions(to: CGSize(width: 2, height: LA_ICON_SIZE/2))
         
-        tenDayButton.autoAlignAxisToSuperviewAxis(.Horizontal)
-        tenDayButton.autoPinEdge(.Left, toEdge: .Right, ofView: lineImageView, withOffset: -DE_OFFSET/2)
-        tenDayButton.autoSetDimensionsToSize(CGSize(width: LA_ICON_SIZE*2, height: LA_ICON_SIZE*2))
+        tenDayButton.autoAlignAxis(toSuperviewAxis: .horizontal)
+        tenDayButton.autoPinEdge(.left, to: .right, of: lineImageView, withOffset: -DE_OFFSET/2)
+        tenDayButton.autoSetDimensions(to: CGSize(width: LA_ICON_SIZE*2, height: LA_ICON_SIZE*2))
         
-        updateLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
-        updateLabel.autoPinEdge(.Right, toEdge: .Left, ofView: updateButton, withOffset: DE_OFFSET/1.5)
+        updateLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
+        updateLabel.autoPinEdge(.right, to: .left, of: updateButton, withOffset: DE_OFFSET/1.5)
         
-        updateButton.autoAlignAxisToSuperviewAxis(.Horizontal)
-        updateButton.autoPinEdgeToSuperviewEdge(.Right, withInset: 0)
-        updateButton.autoSetDimensionsToSize(CGSize(width: LA_ICON_SIZE*2, height: LA_ICON_SIZE*2))
+        updateButton.autoAlignAxis(toSuperviewAxis: .horizontal)
+        updateButton.autoPinEdge(toSuperviewEdge: .right, withInset: 0)
+        updateButton.autoSetDimensions(to: CGSize(width: LA_ICON_SIZE*2, height: LA_ICON_SIZE*2))
     }
 }

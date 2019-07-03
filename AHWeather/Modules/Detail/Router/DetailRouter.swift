@@ -9,12 +9,12 @@
 class DetailRouter: DetailRouterInput {
 
     func pop(navVC: UINavigationController) {
-        navVC.popToRootViewControllerAnimated(true)
+        navVC.popToRootViewController(animated: true)
     }
     
     func present(fromVC: UINavigationController, toVC: UIViewController) {
-        toVC.modalPresentationStyle = .OverCurrentContext
-        toVC.modalTransitionStyle = .CrossDissolve
-        fromVC.presentViewController(toVC, animated: true, completion: nil)
+        toVC.modalPresentationStyle = .overCurrentContext
+        toVC.modalTransitionStyle = .crossDissolve
+        fromVC.present(toVC, animated: true, completion: nil)
     }
 }

@@ -17,7 +17,7 @@ class MapPresenter: NSObject, MapModuleInput, MapViewOutput, MapInteractorOutput
     var block: blockUpdate!
     
     //MARK: - Initialize
-    init(city: City, completionBlock: blockUpdate) {
+    init(city: City, completionBlock: @escaping blockUpdate) {
         super.init()
         
         self.city = city
@@ -30,23 +30,23 @@ class MapPresenter: NSObject, MapModuleInput, MapViewOutput, MapInteractorOutput
 
     //MARK: - MapViewOutput
     func viewIsReady() {
-        EventCenter.defaultCenter.register(self, handler: onEvent)
+        EventCenter.defaultCenter.register(observer: self, handler: onEvent)
 //        locationHelper.locationManager.startUpdatingLocation()
 
         view.setupInitialState(self.city)
     }
     
     func searchAction(city: String) {
-        interactor.findCityForMap(city)
+        interactor.findCityForMap(city: city)
     }
     
     func updateAction(city: String) {
         cancelAction()
-        block!(city: city)
+        block!(city)
     }
     
     func cancelAction() {
-        EventCenter.defaultCenter.unregister(self)
+        EventCenter.defaultCenter.unregister(observer: self)
         
         let vc = appDelegate.window?.rootViewController
         router.dismiss(vc!)
@@ -63,6 +63,6 @@ class MapPresenter: NSObject, MapModuleInput, MapViewOutput, MapInteractorOutput
     
     //MARK: - Events
     func onEvent(data: AHWLocation) {
-       view.updateLocation(data.result)
+        view.updateLocation(data.result)
     }
 }

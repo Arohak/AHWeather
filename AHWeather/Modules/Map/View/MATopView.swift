@@ -10,34 +10,34 @@ class MATopView: UIView {
     
     //MARK: - Create UIElements
     lazy var bgImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
 //        view.image = UIImage(named: "2")
         
         return view
     }()
     
     lazy var textField: AHWTextField = {
-        let view = AHWTextField.newAutoLayoutView()
-        view.attributedPlaceholder = NSAttributedString(string: "Search City", attributes: [NSForegroundColorAttributeName: WHITE])
+        let view = AHWTextField.newAutoLayout()
+        view.attributedPlaceholder = NSAttributedString(string: "Search City", attributes: [NSAttributedStringKey.foregroundColor: WHITE])
 //        view.layer.borderColor = WHITE.CGColor
 //        view.layer.borderWidth = 1
         view.layer.cornerRadius = MA_RADIUS
-        view.returnKeyType = .Done
+        view.returnKeyType = .done
         view.backgroundColor = GRAY_119
         
         return view
     }()
     
     lazy var searchButton: AHWButton = {
-        let view = AHWButton.newAutoLayoutView()
-        view.setBackgroundImage(UIImage(named: "search"), forState: .Normal)
+        let view = AHWButton.newAutoLayout()
+        view.setBackgroundImage(UIImage(named: "search"), for: .normal)
         
         return view
     }()
     
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         backgroundColor = CLEAR
         addAllUIElements()
@@ -60,14 +60,14 @@ class MATopView: UIView {
     func setConstraints() {
         bgImageView.autoPinEdgesToSuperviewEdges()
         
-        textField.autoAlignAxis(.Horizontal, toSameAxisOfView: bgImageView)
-        textField.autoPinEdgeToSuperviewEdge(.Left, withInset: DE_OFFSET/2)
-        textField.autoMatchDimension(.Height, toDimension: .Height, ofView: bgImageView)
-        textField.autoPinEdge(.Right, toEdge: .Left, ofView: searchButton, withOffset: -DE_OFFSET/2)
+        textField.autoAlignAxis(.horizontal, toSameAxisOf: bgImageView)
+        textField.autoPinEdge(toSuperviewEdge: .left, withInset: DE_OFFSET/2)
+        textField.autoMatch(.height, to: .height, of: bgImageView)
+        textField.autoPinEdge(.right, to: .left, of: searchButton, withOffset: -DE_OFFSET/2)
 
-        searchButton.autoAlignAxis(.Horizontal, toSameAxisOfView: bgImageView)
-        searchButton.autoPinEdgeToSuperviewEdge(.Right, withInset: DE_OFFSET/2)
-        searchButton.autoMatchDimension(.Height, toDimension: .Height, ofView: bgImageView)
-        searchButton.autoMatchDimension(.Width, toDimension: .Height, ofView: searchButton)
+        searchButton.autoAlignAxis(.horizontal, toSameAxisOf: bgImageView)
+        searchButton.autoPinEdge(toSuperviewEdge: .right, withInset: DE_OFFSET/2)
+        searchButton.autoMatch(.height, to: .height, of: bgImageView)
+        searchButton.autoMatch(.width, to: .height, of: searchButton)
     }
 }

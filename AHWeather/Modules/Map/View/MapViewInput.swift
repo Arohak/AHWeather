@@ -8,7 +8,7 @@
 
 protocol MapViewInput: class {
 
-    func setupInitialState(city: City)
-    func updateLocation(location: CLLocation)
+    func setupInitialState(_ city: City)
+    func updateLocation(_ location: CLLocation)
     func shakeTextField()
 }

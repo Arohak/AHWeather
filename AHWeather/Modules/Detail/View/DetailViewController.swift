@@ -16,7 +16,7 @@ class DetailViewController: UIViewController, DetailViewInput {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         baseConfig()
@@ -28,7 +28,7 @@ class DetailViewController: UIViewController, DetailViewInput {
         let days = object.forecastDays.map({$0})
         
         var temp = Array<ForecastDay>()
-        for (i, day) in days.enumerate() { if i != 0 { temp.append(day) } }
+        for (i, day) in days.enumerated() { if i != 0 { temp.append(day) } }
         detailView.dayTableView.days = temp
         detailView.dayTableView.reloadData()
         
@@ -36,7 +36,7 @@ class DetailViewController: UIViewController, DetailViewInput {
         detailView.timeCollectionView.reloadData()
         
         detailView.topView.cityNameLabel.text = object.name
-        detailView.topView.iconImageView.kf_setImageWithURL(NSURL(string: "http:" + object.weather.current.condition.icon)!)
+        detailView.topView.iconImageView.kf.setImage(with: URL(string: "http:" + object.weather.current.condition.icon)!)
         detailView.topView.titleLabel.text = object.weather.current.condition.text
         detailView.topView.tempLabel.text = object.weather.current.tempC
         detailView.topView.weekLabel.text = days[0].date.weekDay
@@ -47,33 +47,33 @@ class DetailViewController: UIViewController, DetailViewInput {
     
     // MARK: Private Methods
     private func baseConfig() {
-        detailView.topView.backButton.addTarget(self, action: #selector(DetailViewController.back), forControlEvents: .TouchUpInside)
-        detailView.topView.searchButton.addTarget(self, action: #selector(DetailViewController.search), forControlEvents: .TouchUpInside)
-        detailView.bottomView.fiveDayButton.addTarget(self, action: #selector(DetailViewController.five), forControlEvents: .TouchUpInside)
-        detailView.bottomView.tenDayButton.addTarget(self, action: #selector(DetailViewController.ten), forControlEvents: .TouchUpInside)
-        detailView.bottomView.updateButton.addTarget(self, action: #selector(DetailViewController.update), forControlEvents: .TouchUpInside)
+        detailView.topView.backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
+        detailView.topView.searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
+        detailView.bottomView.fiveDayButton.addTarget(self, action: #selector(five), for: .touchUpInside)
+        detailView.bottomView.tenDayButton.addTarget(self, action: #selector(ten), for: .touchUpInside)
+        detailView.bottomView.updateButton.addTarget(self, action: #selector(update), for: .touchUpInside)
 
         self.view = detailView
     }
     
     // MARK: Actions
-    func back() {
+    @objc func back() {
         output.backAction()
     }
     
-    func search() {
+    @objc func search() {
         output.searchAction()
     }
     
-    func five() {
+    @objc func five() {
         output.fiveDayAction()
     }
     
-    func ten() {
+    @objc func ten() {
         output.tenDayAction()
     }
     
-    func update() {
+    @objc func update() {
         output.updateAction()
     }
 }

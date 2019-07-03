@@ -8,8 +8,8 @@
 
 class WeatherForecast : Object {
     
-    dynamic var name = ""
-    dynamic var weather: Weather!
+    @objc dynamic var name = ""
+    @objc dynamic var weather: Weather!
     var forecastDays = List<ForecastDay>()
     
     convenience init(data: JSON) {
@@ -30,9 +30,9 @@ class WeatherForecast : Object {
 
 class ForecastDay : Object {
     
-    dynamic var date: String!
-    dynamic var day: Day!
-    dynamic var astro: Astro!
+    @objc dynamic var date: String!
+    @objc dynamic var day: Day!
+    @objc dynamic var astro: Astro!
     var hours = List<Hour>()
     
     convenience init(data: JSON) {
@@ -41,18 +41,21 @@ class ForecastDay : Object {
         self.date = data["date"].stringValue
         self.day = Day(data: data["day"])
         self.astro = Astro(data: data["astro"])
-        for item in data["hour"].arrayValue { self.hours.append(Hour(data: item)) }
+        
+        for item in data["hour"].arrayValue {
+            self.hours.append(Hour(data: item))
+        }
     }
 }
 
 class Day : Object {
 
-    dynamic var maxTemp: String!
-    dynamic var minTemp: String!
-    dynamic var avgTemp: String!
-    dynamic var maxWindMph: String!
-    dynamic var maxWindKph: String!
-    dynamic var condition: Condition!
+    @objc dynamic var maxTemp: String!
+    @objc dynamic var minTemp: String!
+    @objc dynamic var avgTemp: String!
+    @objc dynamic var maxWindMph: String!
+    @objc dynamic var maxWindKph: String!
+    @objc dynamic var condition: Condition!
 
     convenience init(data: JSON) {
         self.init()
@@ -68,10 +71,10 @@ class Day : Object {
 
 class Astro : Object {
     
-    dynamic var sunrise: String!
-    dynamic var sunset: String!
-    dynamic var moonrise: String!
-    dynamic var moonset: String!
+    @objc dynamic var sunrise: String!
+    @objc dynamic var sunset: String!
+    @objc dynamic var moonrise: String!
+    @objc dynamic var moonset: String!
     
     convenience init(data: JSON) {
         self.init()
@@ -85,16 +88,16 @@ class Astro : Object {
 
 class Hour : Object {
     
-    dynamic var time: String!
-    dynamic var tempC: String!
-    dynamic var tempF: String!
-    dynamic var mphW: String!
-    dynamic var kphW: String!
-    dynamic var mbP: String!
-    dynamic var inP: String!
-    dynamic var feelslikeC: String!
-    dynamic var feelslikeF: String!
-    dynamic var condition: Condition!
+    @objc dynamic var time: String!
+    @objc dynamic var tempC: String!
+    @objc dynamic var tempF: String!
+    @objc dynamic var mphW: String!
+    @objc dynamic var kphW: String!
+    @objc dynamic var mbP: String!
+    @objc dynamic var inP: String!
+    @objc dynamic var feelslikeC: String!
+    @objc dynamic var feelslikeF: String!
+    @objc dynamic var condition: Condition!
     
     convenience init(data: JSON) {
         self.init()

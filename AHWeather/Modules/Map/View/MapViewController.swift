@@ -24,17 +24,17 @@ class MapViewController: UIViewController, MapViewInput, UITextFieldDelegate {
     }
 
     // MARK: MapViewInput
-    func setupInitialState(city: City) {
+    func setupInitialState(_ city: City) {
         mapView.topView.textField.text = city.name
-        setObjectMarkerPosition(city)
+        setObjectMarkerPosition(city: city)
     }
     
-    func updateLocation(location: CLLocation) {
+    func updateLocation(_ location: CLLocation) {
         self.location = location
     }
     
     func shakeTextField() {
-        UIHelper.shakeWithView(mapView.topView.textField)
+        UIHelper.shakeWithView(view: mapView.topView.textField)
     }
     
     // MARK: Private Methods
@@ -48,10 +48,10 @@ class MapViewController: UIViewController, MapViewInput, UITextFieldDelegate {
         myMarker.icon = UIImage(named: "img_me")
 
         mapView.topView.textField.delegate = self
-        mapView.topView.searchButton.addTarget(self, action: #selector(MapViewController.search), forControlEvents: .TouchUpInside)
-        mapView.bottomView.updateButton.addTarget(self, action: #selector(MapViewController.update), forControlEvents: .TouchUpInside)
-        mapView.bottomView.cancelButton.addTarget(self, action: #selector(MapViewController.cancel), forControlEvents: .TouchUpInside)
-        mapView.bottomView.nearMeButton.addTarget(self, action: #selector(MapViewController.nearMe), forControlEvents: .TouchUpInside)
+        mapView.topView.searchButton.addTarget(self, action: #selector(MapViewController.search), for: .touchUpInside)
+        mapView.bottomView.updateButton.addTarget(self, action: #selector(MapViewController.update), for: .touchUpInside)
+        mapView.bottomView.cancelButton.addTarget(self, action: #selector(MapViewController.cancel), for: .touchUpInside)
+        mapView.bottomView.nearMeButton.addTarget(self, action: #selector(MapViewController.nearMe), for: .touchUpInside)
 
         self.view = mapView
     }
@@ -61,7 +61,7 @@ class MapViewController: UIViewController, MapViewInput, UITextFieldDelegate {
         let longitude =  Double(city.lon)
 
         cityMarker.position = CLLocationCoordinate2DMake(latitude!, longitude!)
-        cityMarker.map!.animateToCameraPosition(GMSCameraPosition.cameraWithLatitude(latitude!, longitude: longitude!, zoom: 15))
+        cityMarker.map!.animate(to: GMSCameraPosition.camera(withLatitude: latitude!, longitude: longitude!, zoom: 15))
     }
     
     private func setMyMarkerPosition(location: CLLocation) {
@@ -69,28 +69,28 @@ class MapViewController: UIViewController, MapViewInput, UITextFieldDelegate {
         let longitude =  location.coordinate.longitude
 
         myMarker.position = CLLocationCoordinate2DMake(latitude, longitude)
-        myMarker.map!.animateToCameraPosition(GMSCameraPosition.cameraWithLatitude(latitude, longitude: longitude, zoom: 15))
+        myMarker.map!.animate(to: GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 15))
     }
     
     // MARK: Actions
-    func search() {
-        output.searchAction(mapView.topView.textField.text!)
+    @objc func search() {
+        output.searchAction(city: mapView.topView.textField.text!)
     }
     
-    func update() {
-        output.updateAction(mapView.topView.textField.text!)
+    @objc func update() {
+        output.updateAction(city: mapView.topView.textField.text!)
     }
     
-    func cancel() {
+    @objc func cancel() {
         output.cancelAction()
     }
     
-    func nearMe() {
-        if let location = location { setMyMarkerPosition(location) }
+    @objc func nearMe() {
+        if let location = location { setMyMarkerPosition(location: location) }
     }
     
     // MARK: UITextFieldDelegate
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         mapView.topView.textField.resignFirstResponder()
         
         return true

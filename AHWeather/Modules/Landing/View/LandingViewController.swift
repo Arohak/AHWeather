@@ -16,7 +16,7 @@ class LandingViewController: UIViewController, LandingViewInput {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         baseConfig()
@@ -32,7 +32,7 @@ class LandingViewController: UIViewController, LandingViewInput {
     // MARK: Private Methods
     private func baseConfig() {
         landingView = LandingView() {
-            self.output.viewIsSelectItem($0)
+            self.output.viewIsSelectItem(item: $0)
         }
         self.view = landingView
     }

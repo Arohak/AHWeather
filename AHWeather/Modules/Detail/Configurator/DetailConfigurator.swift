@@ -8,14 +8,14 @@
 
 class DetailModuleConfigurator {
 
-    func configureModuleForPresenter(presenter: AnyObject) {
+    func configureModuleForPresenter(_ presenter: AnyObject) {
         
         if let presenter = presenter as? DetailPresenter {
             configure(presenter)
         }
     }
     
-    private func configure(presenter: DetailPresenter) {
+    private func configure(_ presenter: DetailPresenter) {
         
         let viewController = DetailViewController()
         let interactor = DetailInteractor()

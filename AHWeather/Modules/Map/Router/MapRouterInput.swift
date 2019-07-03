@@ -8,5 +8,5 @@
 
 protocol MapRouterInput {
     
-    func dismiss(vc: UIViewController)
+    func dismiss(_ vc: UIViewController)
 }

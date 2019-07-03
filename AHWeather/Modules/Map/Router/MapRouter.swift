@@ -8,7 +8,7 @@
 
 class MapRouter: MapRouterInput {
     
-    func dismiss(vc: UIViewController) {
-        vc.dismissViewControllerAnimated(true, completion: nil)
+    func dismiss(_ vc: UIViewController) {
+        vc.dismiss(animated: true, completion: nil)
     }
 }

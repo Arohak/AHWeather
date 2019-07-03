@@ -13,46 +13,46 @@ class DetailView: UIView {
     
     //MARK: - Create UIElements
     lazy var bgImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
         view.image = UIImage(named: "1")
         
         return view
     }()
     
     lazy var bgParentImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
         view.image = UIImage(named: "2")
         
         return view
     }()
     
     lazy var topView: DETopView = {
-        let view = DETopView.newAutoLayoutView()
+        let view = DETopView.newAutoLayout()
         
         return view
     }()
     
     lazy var timeCollectionView: DETimeCollectionView = {
-        let view = DETimeCollectionView.newAutoLayoutView()
+        let view = DETimeCollectionView.newAutoLayout()
         
         return view
     }()
     
     lazy var dayTableView: DEDayTableView = {
-        let view = DEDayTableView.newAutoLayoutView()
+        let view = DEDayTableView.newAutoLayout()
 
         return view
     }()
     
     lazy var bottomView: DEBottomView = {
-        let view = DEBottomView.newAutoLayoutView()
+        let view = DEBottomView.newAutoLayout()
         
         return view
     }()
     
     
     lazy var lineOneImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
         view.backgroundColor = GRAY_119
         
         return view
@@ -60,7 +60,7 @@ class DetailView: UIView {
     
     
     lazy var lineTwoImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
         view.backgroundColor = GRAY_119
         
         return view
@@ -68,13 +68,13 @@ class DetailView: UIView {
     
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         backgroundColor = WHITE
         addAllUIElements()
     }
     
-    convenience init(completionBlock: block) {
+    convenience init(completionBlock: @escaping block) {
         self.init()
         
         myBlock = completionBlock
@@ -105,39 +105,39 @@ class DetailView: UIView {
     func setConstraints() {
         bgImageView.autoPinEdgesToSuperviewEdges()
         
-        bgParentImageView.autoPinEdge(.Top, toEdge: .Top, ofView: timeCollectionView, withOffset: -DE_OFFSET/2)
-        bgParentImageView.autoPinEdgeToSuperviewEdge(.Left)
-        bgParentImageView.autoPinEdgeToSuperviewEdge(.Right)
-        bgParentImageView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: bottomView, withOffset: 0)
+        bgParentImageView.autoPinEdge(.top, to: .top, of: timeCollectionView, withOffset: -DE_OFFSET/2)
+        bgParentImageView.autoPinEdge(toSuperviewEdge: .left)
+        bgParentImageView.autoPinEdge(toSuperviewEdge: .right)
+        bgParentImageView.autoPinEdge(.bottom, to: .bottom, of: bottomView, withOffset: 0)
         
-        lineOneImageView.autoPinEdge(.Top, toEdge: .Top, ofView: timeCollectionView, withOffset: -DE_OFFSET/2)
-        lineOneImageView.autoPinEdgeToSuperviewEdge(.Left)
-        lineOneImageView.autoPinEdgeToSuperviewEdge(.Right)
-        lineOneImageView.autoSetDimension(.Height, toSize: 1)
+        lineOneImageView.autoPinEdge(.top, to: .top, of: timeCollectionView, withOffset: -DE_OFFSET/2)
+        lineOneImageView.autoPinEdge(toSuperviewEdge: .left)
+        lineOneImageView.autoPinEdge(toSuperviewEdge: .right)
+        lineOneImageView.autoSetDimension(.height, toSize: 1)
         
-        topView.autoPinEdgeToSuperviewEdge(.Top)
-        topView.autoPinEdgeToSuperviewEdge(.Left)
-        topView.autoPinEdgeToSuperviewEdge(.Right)
-        topView.autoSetDimension(.Height, toSize: DE_TOP_HEIGHT)
+        topView.autoPinEdge(toSuperviewEdge: .top)
+        topView.autoPinEdge(toSuperviewEdge: .left)
+        topView.autoPinEdge(toSuperviewEdge: .right)
+        topView.autoSetDimension(.height, toSize: DE_TOP_HEIGHT)
         
-        timeCollectionView.autoPinEdge(.Top, toEdge: .Bottom, ofView: topView, withOffset: DE_OFFSET)
-        timeCollectionView.autoPinEdgeToSuperviewEdge(.Left)
-        timeCollectionView.autoPinEdgeToSuperviewEdge(.Right)
-        timeCollectionView.autoSetDimension(.Height, toSize: DE_TIME_CELL_SIZE)
+        timeCollectionView.autoPinEdge(.top, to: .bottom, of: topView, withOffset: DE_OFFSET)
+        timeCollectionView.autoPinEdge(toSuperviewEdge: .left)
+        timeCollectionView.autoPinEdge(toSuperviewEdge: .right)
+        timeCollectionView.autoSetDimension(.height, toSize: DE_TIME_CELL_SIZE)
         
-        dayTableView.autoPinEdge(.Top, toEdge: .Bottom, ofView: timeCollectionView, withOffset: DE_OFFSET/1.5)
-        dayTableView.autoPinEdgeToSuperviewEdge(.Left)
-        dayTableView.autoPinEdgeToSuperviewEdge(.Right)
-        dayTableView.autoPinEdge(.Bottom, toEdge: .Top, ofView: bottomView, withOffset: 0)
+        dayTableView.autoPinEdge(.top, to: .bottom, of: timeCollectionView, withOffset: DE_OFFSET/1.5)
+        dayTableView.autoPinEdge(toSuperviewEdge: .left)
+        dayTableView.autoPinEdge(toSuperviewEdge: .right)
+        dayTableView.autoPinEdge(.bottom, to: .top, of: bottomView, withOffset: 0)
         
-        lineTwoImageView.autoPinEdge(.Top, toEdge: .Bottom, ofView: timeCollectionView, withOffset: DE_OFFSET/1.5)
-        lineTwoImageView.autoPinEdgeToSuperviewEdge(.Left)
-        lineTwoImageView.autoPinEdgeToSuperviewEdge(.Right)
-        lineTwoImageView.autoSetDimension(.Height, toSize: 1)
+        lineTwoImageView.autoPinEdge(.top, to: .bottom, of: timeCollectionView, withOffset: DE_OFFSET/1.5)
+        lineTwoImageView.autoPinEdge(toSuperviewEdge: .left)
+        lineTwoImageView.autoPinEdge(toSuperviewEdge: .right)
+        lineTwoImageView.autoSetDimension(.height, toSize: 1)
         
-        bottomView.autoPinEdgeToSuperviewEdge(.Left)
-        bottomView.autoPinEdgeToSuperviewEdge(.Right)
-        bottomView.autoPinEdgeToSuperviewEdge(.Bottom)
-        bottomView.autoSetDimension(.Height, toSize: DE_BOTTOM_HEIGHT)
+        bottomView.autoPinEdge(toSuperviewEdge: .left)
+        bottomView.autoPinEdge(toSuperviewEdge: .right)
+        bottomView.autoPinEdge(toSuperviewEdge: .bottom)
+        bottomView.autoSetDimension(.height, toSize: DE_BOTTOM_HEIGHT)
     }
 }

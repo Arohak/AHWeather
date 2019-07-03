@@ -8,14 +8,14 @@
 
 class MapModuleConfigurator {
 
-    func configureModuleForPresenter(presenter: AnyObject) {
+    func configureModuleForPresenter(_ presenter: AnyObject) {
         
         if let presenter = presenter as? MapPresenter {
             configure(presenter)
         }
     }
     
-    private func configure(presenter: MapPresenter) {
+    private func configure(_ presenter: MapPresenter) {
         
         let viewController = MapViewController()
         let interactor = MapInteractor()

@@ -29,23 +29,27 @@ extension Double {
 extension String {
     
     var hour: String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone.default
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let date = dateFormatter.dateFromString(self)
-        dateFormatter.dateFormat = "HH:mm"
-        return dateFormatter.stringFromDate(date!)
+        
+        if let date = dateFormatter.date(from: self) {
+            dateFormatter.dateFormat = "HH:mm"
+            return dateFormatter.string(from: date)
+        } else {
+            return ""
+        }
     }
     
     var shortTime: String {
-        if let interval : NSTimeInterval = NSTimeInterval(self) {
-            let date = NSDate(timeIntervalSince1970: interval)
-            let dateFormatter = NSDateFormatter()
+        if let interval : TimeInterval = TimeInterval(self) {
+            let date = Date(timeIntervalSince1970: interval)
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "h:mm a"
-            dateFormatter.AMSymbol = "AM"
-            dateFormatter.PMSymbol = "PM"
-            let time = dateFormatter.stringFromDate(date)
+            dateFormatter.amSymbol = "AM"
+            dateFormatter.pmSymbol = "PM"
+            let time = dateFormatter.string(from: date)
             return time
         }
         
@@ -53,13 +57,13 @@ extension String {
     }
     
     var weekDay: String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone.defaultTimeZone()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone.default
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let date = dateFormatter.dateFromString(self)
+        let date = dateFormatter.date(from: self)
         dateFormatter.dateFormat = "EEEE"
         
-        return dateFormatter.stringFromDate(date!)
+        return dateFormatter.string(from: date!)
     }
 }

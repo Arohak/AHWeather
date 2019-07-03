@@ -8,9 +8,9 @@
 
 class Weather : Object {
     
-    dynamic var name = ""
-    dynamic var location: Location!
-    dynamic var current: Current!
+    @objc dynamic var name = ""
+    @objc dynamic var location: Location!
+    @objc dynamic var current: Current!
     
     convenience init(data: JSON) {
         self.init()
@@ -27,10 +27,10 @@ class Weather : Object {
 
 class Location : Object {
     
-    dynamic var name: String!
-    dynamic var lat: String!
-    dynamic var lon: String!
-    dynamic var localTime: String!
+    @objc dynamic var name: String!
+    @objc dynamic var lat: String!
+    @objc dynamic var lon: String!
+    @objc dynamic var localTime: String!
     
     convenience init(data: JSON) {
         self.init()
@@ -44,16 +44,16 @@ class Location : Object {
 
 class Current : Object {
     
-    dynamic var lastUpdated: String!
-    dynamic var tempC: String!
-    dynamic var tempF: String!
-    dynamic var mphW: String!
-    dynamic var kphW: String!
-    dynamic var mbP: String!
-    dynamic var inP: String!
-    dynamic var feelslikeC: String!
-    dynamic var feelslikeF: String!
-    dynamic var condition: Condition!
+    @objc dynamic var lastUpdated: String!
+    @objc dynamic var tempC: String!
+    @objc dynamic var tempF: String!
+    @objc dynamic var mphW: String!
+    @objc dynamic var kphW: String!
+    @objc dynamic var mbP: String!
+    @objc dynamic var inP: String!
+    @objc dynamic var feelslikeC: String!
+    @objc dynamic var feelslikeF: String!
+    @objc dynamic var condition: Condition!
     
     convenience init(data: JSON) {
         self.init()
@@ -73,9 +73,9 @@ class Current : Object {
 
 class Condition : Object {
     
-    dynamic var text: String!
-    dynamic var icon: String!
-    dynamic var code: String!
+    @objc dynamic var text: String!
+    @objc dynamic var icon: String!
+    @objc dynamic var code: String!
     
     convenience init(data: JSON) {
         self.init()

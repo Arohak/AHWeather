@@ -1,0 +1,70 @@
+
+app_path = "./output"
+ipa_name = "Zangi.ipa"
+
+private_lane :private_beta_sample do |values|
+    # build your iOS app
+    build_app(workspace: "Internal.xcworkspace", scheme: "Internal")
+    # version bump
+    inc_build_number
+    # upload to Testflight
+    upload_to_testflight(skip_submission: true)
+    # notify slack
+    notify_slack(message: "The build has been uploaded to the Testflight")
+end
+
+private_lane :private_beta do |values|
+
+    # delete output file
+    # sh "cd .. && rm -rf output"
+
+    # version bump
+    inc_build_number(values)
+
+    # build app
+    gym(
+        workspace:          "Internal.xcworkspace", 
+        scheme:             "Internal",
+        output_name:        ipa_name,
+        output_directory:   app_path,
+        build_path:         app_path,
+        buildlog_path:      app_path,
+        silent:             true,
+        clean:              true
+    )
+
+    # upload to testflight
+    upload_to_testflight(
+        username: values[:username],
+        skip_waiting_for_build_processing: true
+    )
+
+    # notify slack
+    notify_slack(message: "The build has been uploaded to the Testflight")
+end
+
+private_lane :private_appstore do |values|
+    timeDirName = Time.now.inspect
+    username = values[:username] ? values[:username] : nil
+    time = Time.now
+
+    gym(
+        workspace:      "Internal.xcworkspace",
+        scheme:         "Internal", 
+        export_method:  'app-store',
+        configuration:  'Release'
+    )
+
+    time = Time.now - time
+    log_times(build: time, dirName: timeDirName)
+    show_build_time(dirName: timeDirName)
+
+    appstore(
+        username:           username,
+        skip_screenshots:   true,
+        skip_metadata:      true,
+        force:              true,
+    )
+
+    notify_slack(message: "The build has been uploaded to the AppStore!")
+end

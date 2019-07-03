@@ -8,9 +8,9 @@
 
 class City : Object {
 
-    dynamic var name: String!
-    dynamic var lon: String!
-    dynamic var lat: String!
+    @objc dynamic var name: String!
+    @objc dynamic var lon: String!
+    @objc dynamic var lat: String!
     
     convenience init(data: JSON) {
         self.init()

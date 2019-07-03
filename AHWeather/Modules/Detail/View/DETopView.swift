@@ -10,29 +10,29 @@ class DETopView: UIView {
     
     //MARK: - Create UIElements
     lazy var backButton: AHWButton = {
-        let view = AHWButton.newAutoLayoutView()
-        view.setBackgroundImage(UIImage(named: "back"), forState: .Normal)
+        let view = AHWButton.newAutoLayout()
+        view.setBackgroundImage(UIImage(named: "back"), for: .normal)
         
         return view
     }()
     
     lazy var searchButton: AHWButton = {
-        let view = AHWButton.newAutoLayoutView()
-        view.setBackgroundImage(UIImage(named: "img_map"), forState: .Normal)
+        let view = AHWButton.newAutoLayout()
+        view.setBackgroundImage(UIImage(named: "img_map"), for: .normal)
         
         return view
     }()
     
     lazy var cityNameLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         view.font = DE_NAME_FONT
-        view.textAlignment = .Center
+        view.textAlignment = .center
         
         return view
     }()
     
     lazy var iconImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
 //        view.backgroundColor = BLUE_LIGHT
 //        view.layer.cornerRadius = DE_ICON_SIZE/2
         
@@ -40,22 +40,22 @@ class DETopView: UIView {
     }()
     
     lazy var titleLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         view.font = DE_TITLE_FONT
 
         return view
     }()
     
     lazy var tempLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         view.font = DE_TEMP_FONT
-        view.textAlignment = .Center
+        view.textAlignment = .center
 
         return view
     }()
     
     lazy var weekLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         view.font = DE_TITLE_FONT
         view.text = "Monday"
         
@@ -63,7 +63,7 @@ class DETopView: UIView {
     }()
     
     lazy var tempAverageLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         view.font = DE_TITLE_FONT
         view.text = "13   9"
         
@@ -72,7 +72,7 @@ class DETopView: UIView {
 
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         backgroundColor = CLEAR
         addAllUIElements()
@@ -98,33 +98,33 @@ class DETopView: UIView {
     
     //MARK: - Constraints
     func setConstraints() {
-        backButton.autoPinEdgeToSuperviewEdge(.Top, withInset: DE_OFFSET)
-        backButton.autoPinEdgeToSuperviewEdge(.Left, withInset: DE_OFFSET/2)
-        backButton.autoSetDimensionsToSize(CGSize(width: DE_BTN_SIZE, height: DE_BTN_SIZE))
+        backButton.autoPinEdge(toSuperviewEdge: .top, withInset: DE_OFFSET)
+        backButton.autoPinEdge(toSuperviewEdge: .left, withInset: DE_OFFSET/2)
+        backButton.autoSetDimensions(to: CGSize(width: DE_BTN_SIZE, height: DE_BTN_SIZE))
         
-        searchButton.autoPinEdgeToSuperviewEdge(.Top, withInset: DE_OFFSET)
-        searchButton.autoPinEdgeToSuperviewEdge(.Right, withInset: DE_OFFSET/2)
-        searchButton.autoSetDimensionsToSize(CGSize(width: DE_BTN_SIZE, height: DE_BTN_SIZE))
+        searchButton.autoPinEdge(toSuperviewEdge: .top, withInset: DE_OFFSET)
+        searchButton.autoPinEdge(toSuperviewEdge: .right, withInset: DE_OFFSET/2)
+        searchButton.autoSetDimensions(to: CGSize(width: DE_BTN_SIZE, height: DE_BTN_SIZE))
         
-        cityNameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: backButton)
-        cityNameLabel.autoPinEdgeToSuperviewEdge(.Left)
-        cityNameLabel.autoPinEdgeToSuperviewEdge(.Right)
+        cityNameLabel.autoAlignAxis(.horizontal, toSameAxisOf: backButton)
+        cityNameLabel.autoPinEdge(toSuperviewEdge: .left)
+        cityNameLabel.autoPinEdge(toSuperviewEdge: .right)
         
-        iconImageView.autoPinEdge(.Top, toEdge: .Bottom, ofView: cityNameLabel, withOffset: LA_INSET/2)
-        iconImageView.autoAlignAxis(.Vertical, toSameAxisOfView: cityNameLabel, withOffset: -LA_INSET*2)
-        iconImageView.autoSetDimensionsToSize(CGSize(width: DE_ICON_SIZE, height: DE_ICON_SIZE))
+        iconImageView.autoPinEdge(.top, to: .bottom, of: cityNameLabel, withOffset: LA_INSET/2)
+        iconImageView.autoAlignAxis(.vertical, toSameAxisOf: cityNameLabel, withOffset: -LA_INSET*2)
+        iconImageView.autoSetDimensions(to: CGSize(width: DE_ICON_SIZE, height: DE_ICON_SIZE))
         
-        titleLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: iconImageView)
-        titleLabel.autoPinEdge(.Left, toEdge: .Right, ofView: iconImageView, withOffset: 0)
+        titleLabel.autoAlignAxis(.horizontal, toSameAxisOf: iconImageView)
+        titleLabel.autoPinEdge(.left, to: .right, of: iconImageView, withOffset: 0)
         
-        tempLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: iconImageView, withOffset: -LA_INSET/2)
-        tempLabel.autoPinEdgeToSuperviewEdge(.Left)
-        tempLabel.autoPinEdgeToSuperviewEdge(.Right)
+        tempLabel.autoPinEdge(.top, to: .bottom, of: iconImageView, withOffset: -LA_INSET/2)
+        tempLabel.autoPinEdge(toSuperviewEdge: .left)
+        tempLabel.autoPinEdge(toSuperviewEdge: .right)
         
-        weekLabel.autoPinEdgeToSuperviewEdge(.Bottom)
-        weekLabel.autoPinEdgeToSuperviewEdge(.Left, withInset: LA_INSET)
+        weekLabel.autoPinEdge(toSuperviewEdge: .bottom)
+        weekLabel.autoPinEdge(toSuperviewEdge: .left, withInset: LA_INSET)
 
-        tempAverageLabel.autoPinEdgeToSuperviewEdge(.Bottom)
-        tempAverageLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: LA_INSET)
+        tempAverageLabel.autoPinEdge(toSuperviewEdge: .bottom)
+        tempAverageLabel.autoPinEdge(toSuperviewEdge: .right, withInset: LA_INSET)
     }
 }

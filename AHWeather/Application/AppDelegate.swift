@@ -12,30 +12,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var rootPresenter: LandingPresenter!
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         startApplication()
         
         return true
     }
     
-    private func startApplication() {        
+    private func startApplication() {
+        rootPresenter = LandingPresenter()
+        _ = LandingModuleInitializer(presentor: rootPresenter)
         let vc = rootPresenter.view as! UIViewController
         let nav = UINavigationController(rootViewController: vc)
         nav.setNavigationBarHidden(true, animated: true)
+        configureApplication()
         
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
     }
     
-    //MARK: - TyphoonDefinition Inject
-    func configureApplication() {
+    private func configureApplication() {
         UIHelper.configurateApplicationApperance()
         initServices()
     }
     
-    func initServices() {
-        GMSServices.provideAPIKey("AIzaSyC0ZOSD0RDLsrraE7iID3jQDSG0j-L35rU")
+    private func initServices() {
+        //AIzaSyCGy1iTpcWWI7HSNLhndiJCeSn3eP-us48, AIzaSyC0ZOSD0RDLsrraE7iID3jQDSG0j-L35rU
+        GMSServices.provideAPIKey("AIzaSyCGy1iTpcWWI7HSNLhndiJCeSn3eP-us48")
     }
 }
 

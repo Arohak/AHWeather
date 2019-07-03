@@ -13,7 +13,7 @@ class DEDayTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
 
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero, style: .Plain)
+        super.init(frame: .zero, style: .plain)
         
         backgroundColor = CLEAR
         dataSource = self
@@ -29,25 +29,25 @@ class DEDayTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     }
     
     //MARK: - UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return days.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifire) as? DayCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifire) as? DayCell
         let day = days[indexPath.row]
         if cell == nil {
             cell = DayCell(day: day, reuseIdentifier: cellIdentifire)
         } else {
-            cell!.setValues(day)
+            cell!.setValues(forecastDay: day)
         }
         
         return cell!
     }
     
     //MARK: - UITableViewDelegate
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return LA_CELL_HEIGHT/4
     }
@@ -62,21 +62,21 @@ class DayCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = CLEAR
-        self.selectionStyle = .None
+        self.selectionStyle = .none
     }
     
     convenience init(day: ForecastDay, reuseIdentifier: String?) {
-        self.init(style: .Default, reuseIdentifier: reuseIdentifier)
+        self.init(style: .default, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(cellContentView)
         cellContentView.autoPinEdgesToSuperviewEdges()
         
-        setValues(day)
+        setValues(forecastDay: day)
     }
     
     func setValues(forecastDay: ForecastDay) {
         cellContentView.titleLabel.text = forecastDay.date.weekDay
-        cellContentView.iconImageView.kf_setImageWithURL(NSURL(string: "http:" + forecastDay.day.condition.icon)!)
+        cellContentView.iconImageView.kf.setImage(with: URL(string: "http:" + forecastDay.day.condition.icon)!)
         cellContentView.tempLabel.text = forecastDay.day.maxTemp + "     " + forecastDay.day.minTemp
     }
     
@@ -90,14 +90,14 @@ class DayCellContentView: UIView {
     
     //MARK: - Create UIElements
     lazy var titleLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         view.font = DE_TITLE_FONT
         
         return view
     }()
     
     lazy var iconImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
 //        view.backgroundColor = BLUE_LIGHT
 //        view.layer.cornerRadius = LA_ICON_SIZE/2
         
@@ -105,7 +105,7 @@ class DayCellContentView: UIView {
     }()
 
     lazy var tempLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         view.font = DE_TITLE_FONT
 
         return view
@@ -113,7 +113,7 @@ class DayCellContentView: UIView {
     
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         backgroundColor = CLEAR
         addAllUIElements()
@@ -134,13 +134,13 @@ class DayCellContentView: UIView {
     
     //MARK: - Constraints
     func setConstraints() {
-        titleLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
-        titleLabel.autoPinEdgeToSuperviewEdge(.Left, withInset: LA_INSET)
+        titleLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
+        titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: LA_INSET)
         
         iconImageView.autoCenterInSuperview()
-        iconImageView.autoSetDimensionsToSize(CGSize(width: LA_ICON_SIZE, height: LA_ICON_SIZE))
+        iconImageView.autoSetDimensions(to: CGSize(width: LA_ICON_SIZE, height: LA_ICON_SIZE))
         
-        tempLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
-        tempLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: LA_INSET)
+        tempLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
+        tempLabel.autoPinEdge(toSuperviewEdge: .right, withInset: LA_INSET)
     }
 }

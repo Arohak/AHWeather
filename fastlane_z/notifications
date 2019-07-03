@@ -1,0 +1,38 @@
+
+plist_path              = "./AHWeather/Supporting Files/Info.plist"
+bundle_short_version    = "CFBundleShortVersionString"
+bundle_version          = "CFBundleVersion"
+slack_url               = "https://hooks.slack.com/services/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"
+
+private_lane :notify_slack do |values|
+    message     = values[:message] || ""
+    version     = get_info_plist_value(path: plist_path, key: bundle_short_version)
+    build       = get_info_plist_value(path: plist_path, key: bundle_version)
+    fullVersion = "#{version}(#{build})"
+    slack(
+        slack_url:          slack_url,
+        message:            message,
+        payload:            { Version: fullVersion },
+        default_payloads:   [:git_branch],
+    )
+end
+
+private_lane :inc_build_number do |values|
+    version = get_info_plist_value(path: plist_path, key: bundle_short_version)
+    build = get_info_plist_value(path: plist_path, key: bundle_version)
+    new_build = values[:build] || (build.to_i + 1).to_s
+    new_version = values[:version] || version
+
+    puts "current: #{version}(#{build}), new: #{new_version}(#{new_build})"
+
+    set_info_plist_value(path: plist_path, key: bundle_short_version, value: new_version)
+    set_info_plist_value(path: plist_path, key: bundle_version, value: new_build)
+end
+
+private_lane :update_build_number do |values|
+    value       = values[:append] || ""
+    version     = get_info_plist_value(path: plist_path, key: bundle_version)
+    new_version = "#{version}#{value}"
+    puts "current: #{version}, new: #{new_version}"
+    set_info_plist_value(path: plist_path, key: bundle_version, value: new_version)
+end

@@ -11,8 +11,8 @@ class BaseView: UIView {
     
     //MARK: - Create UIElements
     lazy var tableView: UITableView = {
-        let view = UITableView(frame: CGRectZero, style: .Plain)
-        view.separatorStyle = .None
+        let view = UITableView(frame: .zero, style: .plain)
+        view.separatorStyle = .none
         view.backgroundColor = CLEAR
         view.showsVerticalScrollIndicator = false
         view.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -22,7 +22,7 @@ class BaseView: UIView {
     
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         backgroundColor = CLEAR
     }
@@ -48,7 +48,7 @@ class AHWLabel: UILabel {
     
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         font = LA_LBL_FONT
         textColor = WHITE
@@ -62,23 +62,23 @@ class AHWLabel: UILabel {
 //MARK: - AHWTextField
 class AHWTextField: UITextField {
     
-    var indexPath = NSIndexPath(forRow: 0, inSection: 0)
+    var indexPath = IndexPath(row: 0, section: 0)
 
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
-        keyboardType = .Default
+        keyboardType = .default
         tintColor = WHITE
         textColor = WHITE
     }
     
-    override func textRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset(bounds, 7, 7)
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: 7, dy:7)
     }
     
-    override func editingRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset(bounds, 7, 7)
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: 7, dy:7)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -95,7 +95,7 @@ class AHWButton: UIButton {
     override init(frame : CGRect) {
         super.init(frame: frame)
         
-        self.exclusiveTouch = true
+        self.isExclusiveTouch = true
         self.titleLabel?.font = DE_TITLE_FONT
     }
     
@@ -107,9 +107,9 @@ class AHWButton: UIButton {
 //MARK: - Extension UIFont
 extension UIFont {
     func sizeOfString (string: String, constrainedToWidth width: Double) -> CGSize {
-        return (string as NSString).boundingRectWithSize(CGSize(width: width, height: DBL_MAX),
-            options: NSStringDrawingOptions.UsesLineFragmentOrigin,
-            attributes: [NSFontAttributeName: self],
+        return (string as NSString).boundingRect(with: CGSize(width: width, height: 1000),
+                                                         options: NSStringDrawingOptions.usesLineFragmentOrigin,
+                                                         attributes: [NSAttributedStringKey.font: self],
             context: nil).size
     }
 }

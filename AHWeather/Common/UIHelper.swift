@@ -6,33 +6,28 @@
 //  Copyright © 2016 AroHak LLC. All rights reserved.
 //
 
-import SwiftLoader
 import PKHUD
 
 struct UIHelper {
     
     static func configurateApplicationApperance() {
-        UIApplication.sharedApplication().statusBarHidden = false
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UIApplication.shared.isStatusBarHidden = false
+        UIApplication.shared.statusBarStyle = .lightContent
         
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.barTintColor = GREEN
         navBarAppearance.tintColor = WHITE
-        navBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: WHITE, NSFontAttributeName : TITLE_BTN_FONT]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: WHITE, .font : TITLE_BTN_FONT]
     }
     
     static func showProgressHUD() {
-        var config = SwiftLoader.Config()
-        config.size = 100
-        config.spinnerColor = WHITE
-        config.backgroundColor = GRAY_164
-        config.foregroundAlpha = 0.3
-        SwiftLoader.setConfig(config)
-        SwiftLoader.show(animated: true)
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        HUD.show(.progress)
     }
     
     static func hideProgressHUD() {
-        SwiftLoader.hide()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        HUD.hide()
     }
     
     static func showHUD(message: String) {
@@ -43,10 +38,10 @@ struct UIHelper {
     }
     
     static func showAlert(message: String) {
-        let alertController = UIAlertController(title: "AHWeather", message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        let alertController = UIAlertController(title: "AHWeather", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         let vc = appDelegate.window!.rootViewController
-        vc!.presentViewController(alertController, animated: true, completion: nil)
+        vc!.present(alertController, animated: true, completion: nil)
     }
     
     static func shakeWithView(view: UIView) {
@@ -55,14 +50,14 @@ struct UIHelper {
         shake.repeatCount = 2
         shake.autoreverses = true
         
-        let from_point = CGPointMake(view.center.x - 5, view.center.y)
-        let from_value = NSValue(CGPoint: from_point)
+        let from_point = CGPoint(x: view.center.x - 5, y: view.center.y)
+        let from_value = NSValue(cgPoint: from_point)
         
-        let to_point = CGPointMake(view.center.x + 5, view.center.y)
-        let to_value = NSValue(CGPoint: to_point)
+        let to_point = CGPoint(x: view.center.x + 5, y: view.center.y)
+        let to_value = NSValue(cgPoint: to_point)
         
         shake.fromValue = from_value
         shake.toValue = to_value
-        view.layer.addAnimation(shake, forKey: "position")
+        view.layer.add(shake, forKey: "position")
     }
 }

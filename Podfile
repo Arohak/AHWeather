@@ -4,19 +4,14 @@
  use_frameworks!
 
 target 'AHWeather' do
-    pod 'Typhoon'
     pod 'RxAlamofire'
     pod 'RealmSwift'
-    pod 'EventCenter'
     pod 'PureLayout'
-    pod 'SwiftLoader'
     pod 'Kingfisher'
     pod 'SwiftyJSON'
     pod 'PKHUD'
     pod 'GoogleMaps'
-end
-
-target 'AHWeatherTests' do
-
+	pod 'Fabric'
+	pod 'Crashlytics'
 end
 

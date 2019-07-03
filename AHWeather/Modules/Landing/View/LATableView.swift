@@ -14,17 +14,17 @@ class LATableView: UITableView, UITableViewDataSource, UITableViewDelegate {
 
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero, style: .Plain)
+        super.init(frame: .zero, style: .plain)
         
         backgroundColor = CLEAR
         dataSource = self
         delegate = self
-        separatorStyle = .None
+        separatorStyle = .none
         showsVerticalScrollIndicator = false
         contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
-    convenience init(completionBlock: block) {
+    convenience init(completionBlock: @escaping block) {
         self.init()
         
         myBlock = completionBlock
@@ -35,32 +35,32 @@ class LATableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     }
     
     //MARK: - UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return items.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifire) as? LandingCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifire) as? LandingCell
         let item = items[indexPath.row]
         if cell == nil {
             cell = LandingCell(item: item, reuseIdentifier: cellIdentifire)
         } else {
-            cell!.setValues(item)
+            cell!.setValues(item: item)
         }
         
         return cell!
     }
     
     //MARK: - UITableViewDelegate
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return LA_CELL_HEIGHT
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = items[indexPath.row]
-        myBlock(value: item)
+        myBlock(item)
     }
 }
 
@@ -73,21 +73,21 @@ class LandingCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = CLEAR
-        self.selectionStyle = .None
+        self.selectionStyle = .none
     }
     
     convenience init(item: Weather, reuseIdentifier: String?) {
-        self.init(style: .Default, reuseIdentifier: reuseIdentifier)
+        self.init(style: .default, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(cellContentView)
         cellContentView.autoPinEdgesToSuperviewEdges()
         
-        setValues(item)
+        setValues(item: item)
     }
     
     func setValues(item: Weather) {
         cellContentView.cityNameLabel.text = item.location.name
-        cellContentView.iconImageView.kf_setImageWithURL(NSURL(string: "http:" + item.current.condition.icon)!)
+        cellContentView.iconImageView.kf.setImage(with: URL(string: "http:" + item.current.condition.icon)!)
         cellContentView.titleLabel.text = item.current.condition.text
         cellContentView.tempLabel.text = "Temp:    " + item.current.tempC + ",  " + item.current.tempF
         cellContentView.mphLabel.text = "MPHW:    " + item.current.mphW
@@ -104,14 +104,14 @@ class LandingCellContentView: UIView {
     
     //MARK: - Create UIElements
     lazy var cityNameLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         view.font = DE_NAME_FONT
         
         return view
     }()
     
     lazy var iconImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
 //        view.backgroundColor = BLUE_LIGHT
 //        view.layer.cornerRadius = LA_ICON_SIZE/2
         
@@ -119,33 +119,33 @@ class LandingCellContentView: UIView {
     }()
     
     lazy var titleLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         view.font = TITLE_LBL_FONT
         
         return view
     }()
 
     lazy var tempLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         
         return view
     }()
     
     lazy var mphLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         
         return view
     }()
     
     lazy var kphLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         
         return view
     }()
     
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         backgroundColor = CLEAR
         addAllUIElements()
@@ -169,23 +169,23 @@ class LandingCellContentView: UIView {
     
     //MARK: - Constraints
     func setConstraints() {
-        cityNameLabel.autoPinEdgeToSuperviewEdge(.Top)
-        cityNameLabel.autoAlignAxisToSuperviewAxis(.Vertical)
+        cityNameLabel.autoPinEdge(toSuperviewEdge: .top)
+        cityNameLabel.autoAlignAxis(toSuperviewAxis: .vertical)
 
-        iconImageView.autoPinEdgeToSuperviewEdge(.Left, withInset: LA_INSET)
-        iconImageView.autoPinEdge(.Top, toEdge: .Bottom, ofView: cityNameLabel, withOffset: LA_INSET)
-        iconImageView.autoSetDimensionsToSize(CGSize(width: LA_ICON_SIZE, height: LA_ICON_SIZE))
+        iconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: LA_INSET)
+        iconImageView.autoPinEdge(.top, to: .bottom, of: cityNameLabel, withOffset: LA_INSET)
+        iconImageView.autoSetDimensions(to: CGSize(width: LA_ICON_SIZE, height: LA_ICON_SIZE))
         
-        titleLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: iconImageView)
-        titleLabel.autoPinEdge(.Left, toEdge: .Right, ofView: iconImageView, withOffset: LA_INSET)
+        titleLabel.autoAlignAxis(.horizontal, toSameAxisOf: iconImageView)
+        titleLabel.autoPinEdge(.left, to: .right, of: iconImageView, withOffset: LA_INSET)
         
-        tempLabel.autoPinEdgeToSuperviewEdge(.Left, withInset: LA_INSET)
-        tempLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: iconImageView, withOffset: LA_INSET)
+        tempLabel.autoPinEdge(toSuperviewEdge: .left, withInset: LA_INSET)
+        tempLabel.autoPinEdge(.top, to: .bottom, of: iconImageView, withOffset: LA_INSET)
         
-        mphLabel.autoPinEdgeToSuperviewEdge(.Left, withInset: LA_INSET)
-        mphLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: tempLabel, withOffset: 0)
+        mphLabel.autoPinEdge(toSuperviewEdge: .left, withInset: LA_INSET)
+        mphLabel.autoPinEdge(.top, to: .bottom, of: tempLabel, withOffset: 0)
         
-        kphLabel.autoPinEdgeToSuperviewEdge(.Left, withInset: LA_INSET)
-        kphLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: mphLabel, withOffset: 0)
+        kphLabel.autoPinEdge(toSuperviewEdge: .left, withInset: LA_INSET)
+        kphLabel.autoPinEdge(.top, to: .bottom, of: mphLabel, withOffset: 0)
     }
 }

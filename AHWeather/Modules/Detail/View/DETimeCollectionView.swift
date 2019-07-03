@@ -14,16 +14,16 @@ class DETimeCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
     //MARK: - Initialize
     init() {
         let layout = UICollectionViewFlowLayout()
-        super.init(frame: CGRectZero, collectionViewLayout: layout)
+        super.init(frame: .zero, collectionViewLayout: layout)
         
-        layout.scrollDirection = .Horizontal
+        layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: DE_TIME_CELL_SIZE, height: DE_TIME_CELL_SIZE)
-        layout.sectionInset = UIEdgeInsetsZero
+        layout.sectionInset = .zero
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         
         backgroundColor = CLEAR
-        registerClass(TimeCollectionCell.self, forCellWithReuseIdentifier: cellIdentifire)
+        register(TimeCollectionCell.self, forCellWithReuseIdentifier: cellIdentifire)
         showsHorizontalScrollIndicator = false
         dataSource = self
         delegate = self
@@ -39,14 +39,14 @@ class DETimeCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return hours.count
     }
 
     //MARK: - UICollectionViewDelegate
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifire, forIndexPath: indexPath) as! TimeCollectionCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifire, for: indexPath) as! TimeCollectionCell
         let hour = hours[indexPath.row]
         cell.setValues(hour)
         
@@ -68,8 +68,8 @@ class TimeCollectionCell: UICollectionViewCell {
         cellContentView.autoPinEdgesToSuperviewEdges()
     }
     
-    func setValues(hour: Hour) {
-        cellContentView.iconImageView.kf_setImageWithURL(NSURL(string: "http:" + hour.condition.icon)!)
+    func setValues(_ hour: Hour) {
+        cellContentView.iconImageView.kf.setImage(with: URL(string: "http:" + hour.condition.icon)!)
         cellContentView.timeLabel.text = hour.time
         cellContentView.tempLabel.text = hour.tempC
     }
@@ -84,13 +84,13 @@ class TimeCellContentView: UIView {
     
     //MARK: - Create UIElements
     lazy var timeLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         
         return view
     }()
     
     lazy var iconImageView: UIImageView = {
-        let view = UIImageView.newAutoLayoutView()
+        let view = UIImageView.newAutoLayout()
 //        view.backgroundColor = BLUE_LIGHT
 //        view.layer.cornerRadius = DE_TIME_CELL_SIZE/4
         
@@ -98,14 +98,14 @@ class TimeCellContentView: UIView {
     }()
     
     lazy var tempLabel: AHWLabel = {
-        let view = AHWLabel.newAutoLayoutView()
+        let view = AHWLabel.newAutoLayout()
         
         return view
     }()
     
     //MARK: - Initialize
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
         
         addAllUIElements()
     }
@@ -125,14 +125,14 @@ class TimeCellContentView: UIView {
     
     //MARK: - Constraints
     func setConstraints() {
-        timeLabel.autoAlignAxisToSuperviewAxis(.Vertical)
-        timeLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 0)
+        timeLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        timeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
         
         iconImageView.autoCenterInSuperview()
-        iconImageView.autoSetDimensionsToSize(CGSize(width: DE_TIME_CELL_SIZE/2, height: DE_TIME_CELL_SIZE/2))
+        iconImageView.autoSetDimensions(to: CGSize(width: DE_TIME_CELL_SIZE/2, height: DE_TIME_CELL_SIZE/2))
         
-        tempLabel.autoAlignAxisToSuperviewAxis(.Vertical)
-        tempLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 0)
+        tempLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+        tempLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
     }
 }
 

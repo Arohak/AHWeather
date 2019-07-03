@@ -1,0 +1,39 @@
+
+app_path = "./output"
+ipa_name = "Zangi.ipa"
+crashlytics_api_token = "68d8d04c48350cedad5a3c0349c6bcee854d39a8"
+
+private_lane :private_fabric do |values|
+
+    inc_build_number(values)
+
+    gym(
+        workspace:        "Internal.xcworkspace", 
+        scheme:           "Internal",
+        export_method:    "ad-hoc",
+        configuration:    "Ad Hoc",
+        output_name:      ipa_name,
+        output_directory: app_path,
+        build_path:       app_path,
+        buildlog_path:    app_path,
+        silent:           true,
+        clean:            true
+    )
+
+    crashlytics(api_token: crashlytics_api_token,
+                build_secret: '277af3d50b39d015472bca605f952b21511fbe01b9e56965026a27d6a3d245dc',
+                emails: ['ara.hakobyan@zangi.com'],
+                groups: ['plain'],
+                notes: 'Distributed with fastlane', # Check out the changelog_from_git_commits action
+                notifications: true) # Should this distribution notify your testers via email?
+    
+    upload_dsyms
+    notify_slack(message: "Successfully uploaded a beta release for *iOS* - see it at https://fabric.io/_/beta")
+end
+
+private_lane :upload_dsyms do
+    upload_symbols_to_crashlytics(
+      dsym_path: "./output/Zangi.app.dSYM.zip",
+      api_token: crashlytics_api_token
+    )
+end

@@ -23,11 +23,11 @@ class LandingPresenter: NSObject, LandingModuleInput, LandingViewOutput, Landing
         _ = DetailModuleInitializer(presentor: detailPresenter)
         
         let nav = appDelegate.window?.rootViewController as! UINavigationController
-        router.push(nav, toVC: detailPresenter.view as! UIViewController)
+        router.push(fromVC: nav, toVC: detailPresenter.view as! UIViewController)
     }
     
     //MARK: - LandingInteractorOutput
     func dataIsReady(items: Array<Weather>) {
-        view.setupInitialState(items)
+        view.setupInitialState(items: items)
     }
 }

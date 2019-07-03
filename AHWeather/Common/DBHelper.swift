@@ -33,7 +33,7 @@ class DBHelper {
     
     //MARK: - Weather Forecast
     func getStoredWeatherForecast(city: String) -> Results<WeatherForecast> {
-        let weathers = realm.objects(WeatherForecast).filter("name == %@", city)
+        let weathers = realm.objects(WeatherForecast.self).filter("name == %@", city)
         
         return weathers
     }

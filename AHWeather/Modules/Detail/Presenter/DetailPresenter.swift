@@ -29,7 +29,7 @@ class DetailPresenter: NSObject, DetailModuleInput, DetailViewOutput, DetailInte
 
     //MARK: - DetailViewOutput
     func viewIsReady() {
-        interactor.getWeatherForecast(cityName, days: days)
+        interactor.getWeatherForecast(city: cityName, days: days)
     }
     
     //MARK: - DetailInteractorOutput
@@ -39,39 +39,39 @@ class DetailPresenter: NSObject, DetailModuleInput, DetailViewOutput, DetailInte
             let json = JSON(["name" : cityName, "lat" : object.weather.location.lat, "lon" : object.weather.location.lon])
             self.city = City(data: json)
 
-            view.setupInitialState(object)
+            view.setupInitialState(object: object)
         }
     }
     
     //MARK: - DetailViewOutput
     func backAction() {
         let nav = appDelegate.window?.rootViewController as! UINavigationController
-        router.pop(nav)
+        router.pop(navVC: nav)
     }
     
     func searchAction() {
         let mapPresenter = MapPresenter(city: city) { cityName in
             if !cityName.isEmpty {
-                self.interactor.getWeatherForecast(cityName, days: self.days)
+                self.interactor.getWeatherForecast(city: cityName, days: self.days)
             }
         }
         _ = MapModuleInitializer(presentor: mapPresenter)
         
         let nav = appDelegate.window?.rootViewController as! UINavigationController        
-        router.present(nav, toVC: mapPresenter.view as! UIViewController)
+        router.present(fromVC: nav, toVC: mapPresenter.view as! UIViewController)
     }
     
     func fiveDayAction() {
         days = "5"
-        interactor.getWeatherForecast(cityName, days: days)
+        interactor.getWeatherForecast(city: cityName, days: days)
     }
     
     func tenDayAction() {
         days = "10"
-        interactor.getWeatherForecast(cityName, days: days)
+        interactor.getWeatherForecast(city: cityName, days: days)
     }
     
     func updateAction() {
-        interactor.getWeatherForecast(cityName, days: days)
+        interactor.getWeatherForecast(city: cityName, days: days)
     }
 }

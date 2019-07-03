@@ -11,26 +11,27 @@ class DetailInteractor: DetailInteractorInput {
     weak var output: DetailInteractorOutput!
     
     func getWeatherForecast(city: String, days: String) {
-        _ = apiHelper.rx_GetWeatherForecast(city, days: days)
+        _ = apiHelper.rx_GetWeatherForecast(cityName: city, days: days)
             .subscribe(onNext: { data in
                 if let error = data["error"]["message"].string {
-                    UIHelper.showHUD(error)
+                    UIHelper.showHUD(message: error)
                     return
                 }
                 let weatherForecast = WeatherForecast(data: data)
-                dbHelper.storeWeatherForecast(weatherForecast)
-                let object = dbHelper.getStoredWeatherForecast(weatherForecast.name).map({$0})[0]
+                dbHelper.storeWeatherForecast(item: weatherForecast)
+                let object = dbHelper.getStoredWeatherForecast(city: weatherForecast.name).map({$0})[0]
                 
-                self.output.dataIsReady(object)
+                self.output.dataIsReady(object: object)
                 
                 }, onError: { e in
-                    UIHelper.showHUD("No Internet Connection")
+                    UIHelper.showHUD(message: "No Internet Connection")
                     var object: WeatherForecast?
-                    if dbHelper.getStoredWeatherForecast(city).map({$0}).count > 0 {
-                        object = dbHelper.getStoredWeatherForecast(city).map({$0})[0]
+                    let results = dbHelper.getStoredWeatherForecast(city: city)
+                    if Array(results).map({$0}).count > 0 {
+                        object = results.map({$0})[0]
                     }
                     
-                    self.output.dataIsReady(object)
+                    self.output.dataIsReady(object: object)
                 })
     }
 }
